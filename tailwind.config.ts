@@ -50,11 +50,5 @@ export default {
       },
     },
   },
-  plugins: [],
-  safelist: [
-    'text-green-50',
-    'bg-green-50',
-    'bg-green-90',
-    'hover:bg-black',
-  ],
+  plugins: []
 } satisfies Config;
