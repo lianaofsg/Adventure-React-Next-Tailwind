@@ -44,16 +44,16 @@ const Navbar = () => {
       {/* Animation for small screen */}
       {
         isOpen && (
-          <div className="absolute right-0 justify-center top-20 rounded-2xl w-[30%] bg-green-50 py-4 shadow-lg lg:hidden">
+          <div className="absolute right-0 justify-center top-20 rounded-2xl w-[50%] bg-green-50 py-4 shadow-lg lg:hidden">
             <ul className="flex flex-col gap-6">
               {NAV_LINKS.map((link) => (
-                <Link href={link.href} key={link.key} className="regular-16 text-white flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold">
+                <Link onClick={()=>{setIsOpen(!isOpen)}} href={link.href} key={link.key} className="regular-16 text-white flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold">
                   {link.label}
                 </Link>
               ))}
             </ul>
 
-            <div className="mt-6 flexCenter">
+            <div className="mt-6 flexCenter" onClick={()=>{setIsOpen(!isOpen)}}>
               <Button
                 type="button"
                 title="Login"
