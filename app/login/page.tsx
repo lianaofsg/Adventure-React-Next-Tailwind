@@ -82,6 +82,7 @@ const LoginPage = () => {
                 )}
 
                 <Button type="submit" title="Sign In" variant="btn_dark_green" full />
+                
               </form>
             </div>
           </div>
