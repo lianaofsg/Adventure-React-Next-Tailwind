@@ -4,10 +4,25 @@ import { NAV_LINKS } from "@/constants"
 import Image from "next/image"
 import Link from "next/link"
 import Button from "./Button"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const user = typeof window !== "undefined" ? localStorage.getItem("adventure-user") : null
+    setIsLoggedIn(!!user)
+  }, [pathname]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("adventure-user")
+    setIsLoggedIn(false)
+    router.push("/login")
+  }
 
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5">
@@ -24,12 +39,23 @@ const Navbar = () => {
       </ul>
 
       <div className="lg:flexCenter hidden lg:flex">
-        <Button
-          type="button"
-          title="Login"
-          icon="/user.svg"
-          variant="btn_dark_green"
-        />
+        {isLoggedIn ? (
+          <button
+            onClick={handleLogout}
+            className="flexCenter gap-3 rounded-full border btn_dark_green px-8 py-4"
+          >
+            <img src="/user.svg" alt="Logout" width={24} height={24} />
+            <label className="bold-16 whitespace-nowrap cursor-pointer">Logout</label>
+          </button>
+        ) : (
+          <Button
+            type="button"
+            title="Login"
+            icon="/user.svg"
+            variant="btn_dark_green"
+            href="/login"
+          />
+        )}
       </div>
 
       <Image
@@ -54,12 +80,23 @@ const Navbar = () => {
             </ul>
 
             <div className="mt-6 flexCenter" onClick={()=>{setIsOpen(!isOpen)}}>
-              <Button
-                type="button"
-                title="Login"
-                icon="/user.svg"
-                variant="btn_dark_green"
-              />
+              {isLoggedIn ? (
+                <button
+                  onClick={handleLogout}
+                  className="flexCenter gap-3 rounded-full border btn_dark_green px-8 py-4"
+                >
+                  <img src="/user.svg" alt="Logout" width={24} height={24} />
+                  <label className="bold-16 whitespace-nowrap cursor-pointer">Logout</label>
+                </button>
+              ) : (
+                <Button
+                  type="button"
+                  title="Login"
+                  icon="/user.svg"
+                  variant="btn_dark_green"
+                  href="/login"
+                />
+              )}
             </div>
           </div>
         )}

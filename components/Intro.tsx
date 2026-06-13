@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image'
 import React from 'react'
 import Button from './Button'
@@ -42,7 +43,7 @@ const Intro = () => {
           <div className='flex flex-col w-full gap-3 sm:flex-row'>
             <Button
               type='button'
-              title='Contack Us'
+              title='Contact Us'
               variant='btn_green' />
 
 
